@@ -10,9 +10,12 @@ export const userMock = (amount) => {
             first_name: faker.person.firstName(),
             last_name: faker.person.lastName(),
             email: faker.internet.email(),
-            phone: faker.phone.number( { style: 'international' } ),
-            address: `${faker.location.streetAddress()}, ${faker.location.city()}, ${faker.location.zipCode()}`, 
-            image: faker.image.avatar(),
+            phone: faker.phone.number(),
+            address: {
+                street: faker.location.streetAddress(),
+                city: faker.location.city(),
+                zipCode: faker.location.zipCode()
+            },
             password: createHash('123456'),
         });
     }

@@ -19,12 +19,22 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     address: {
-        type: String,
+        _id: false,
+        type: {
+            street: {
+                type: String,
+                required: true
+            },
+            city: {
+                type: String,
+                required: true
+            },
+            zipCode: {
+                type: String,
+                required: true
+            }
+        },      
         required: true
-    },
-    image: {
-        type: String,
-        required: false
     },
     password: {
         type: String,

@@ -23,7 +23,7 @@ class PetDao {
     }
 
     async removeAll() {
-        return await userModel.deleteMany();
+        return await petModel.deleteMany();
     }
 }
 

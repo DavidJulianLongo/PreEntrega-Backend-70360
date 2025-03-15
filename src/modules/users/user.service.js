@@ -17,6 +17,7 @@ class UserService {
 
         for (const user of users) {
             if (user.email) user.email = user.email.toLowerCase(); 
+            if (user.phone) user.phone = user.phone.replace(/\D/g, '');
             await userDao.create(user);
         }
         return await userDao.getAll();

@@ -5,27 +5,26 @@ const petSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    specie: {
+    type: {
         type: String,
         required: true
     },
-    birthdate: {
-        type: Date,
+    birthDate: {
+        type: String,
         required: true
     },
     adopted: {
         type: String,
-        required: true
-    },
-    image: {
-        type: String
+        required: true,
+        default: false
     },
     owners: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'user',
+            default: []
         }],
     }
 });
 
-export const userModel = mongoose.model("pet", petSchema);
+export const petModel = mongoose.model("pet", petSchema);
