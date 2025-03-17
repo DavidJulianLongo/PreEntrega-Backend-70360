@@ -1,6 +1,7 @@
 import express from 'express';
 import { conectMongoDB } from './config/mongoDB.config.js';
 import router from './common/router.js';
+import { errorHandler } from './common/errors/error.handler.js';
 
 
 const app = express();
@@ -12,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 // Rutas de la api
 app.use("/api", router);
 
+// Middleware de errores
+app.use(errorHandler);
 
 // Conexión a MongoDB y arranque del servidor
 conectMongoDB()
