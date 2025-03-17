@@ -19,7 +19,7 @@ class AuthController {
             res.cookie('token', token, { httpOnly: true }, { maxAg: 360000 });
             res.status(200).json({ message: 'Login successful', token });
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            res.status(404).json({ error: error.message });
         }
     }
 

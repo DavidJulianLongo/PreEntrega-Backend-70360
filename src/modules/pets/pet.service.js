@@ -10,7 +10,6 @@ class PetService {
 
     async createPetMock(amount) {
         const pets = petMock(amount);
-        
         await petDao.removeAll();
 
         for (const pet of pets) {
