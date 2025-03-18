@@ -11,7 +11,7 @@ class AuthService {
 
     async register(user) {
         const existingUser = await userDao.getOne({ email: user.email });
-        if (existingUser) throw new AppError('User already exists', 400);
+        if (existingUser) throw new AppError('User already exists', 409);
 
         const newUser = {
             ...user,
@@ -27,7 +27,7 @@ class AuthService {
         if (!user) throw new AppError('User not found', 404);
 
         const isValid = isValidPassword(password, user);
-        if (!isValid) throw new AppError('Invalid email or password', 400);
+        if (!isValid) throw new AppError('Invalid email or password', 401);
 
         const token = generateToken(user);
         return token;
