@@ -6,7 +6,7 @@ class UserService {
 
     async getAll() {
         const users = await userDao.getAll();
-        if (!users) throw new Error('No users found');
+        if (!users) throw new Error('Not users found');
         return users;
     }
 

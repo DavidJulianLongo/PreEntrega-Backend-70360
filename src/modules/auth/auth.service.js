@@ -3,7 +3,7 @@ import { createHash } from '../../common/utils/hashPassword.js';
 import { isValidPassword } from '../../common/utils/hashPassword.js';
 import { generateToken } from '../../common/utils/jwt.js';
 import { AppError } from '../../common/errors/appError.js'; 
-
+import UserDTO from '../users/user.dto.js';
 
 
 
@@ -13,12 +13,11 @@ class AuthService {
         const existingUser = await userDao.getOne({ email: user.email });
         if (existingUser) throw new AppError('User already exists', 409);
 
-        const newUser = {
-            ...user,
-            password: createHash(user.password)
-        }
+        // Usamos el DTO para transformar los datos antes de guardarlos
+        const userDTO = new UserDTO(user);  
+        userDTO.password = createHash(userDTO.password);
 
-        return await userDao.create(newUser);
+        return await userDao.create(userDTO);
     }
 
 

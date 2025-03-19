@@ -7,8 +7,7 @@ class PetController {
         try {
 
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: "Internal server error" });
+            next(error);
         }
     }
 
@@ -18,8 +17,7 @@ class PetController {
             const pets = await petService.createPetMock(amount);
             res.status(200).json({ status: "success", payload: pets });
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: "Internal server error" });
+           next(error);
         }
     }
 
