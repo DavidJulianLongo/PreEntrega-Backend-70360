@@ -6,7 +6,7 @@ export const registerSchema = {
         {
             first_name: z.string().min(2, "The field cannot be empty and must contain at least 2 characters"),
             last_name: z.string().min(2, "The field cannot be empty and must contain at least 2 characters"),
-            email: z.string().email("Must be a valid email").transform(value => value.toLowerCase()),
+            email: z.string().email("Must be a valid email"),
             phone: z.string().regex(/^\+\d{7,15}$/, "Must be a valid international phone number (example: +54xxxxxxxxxx), and without spaces or hyphens"),
             address: z.object({
                 street: z.string(),

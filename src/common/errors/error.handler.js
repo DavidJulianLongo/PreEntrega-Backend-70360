@@ -3,7 +3,7 @@ export const errorHandler = (error, req, res, next) => {
     const message = status === 500 ? "Something went wrong" : error.message;
     const stack = error.stack.split('\n');
     const err = {
-        statusCode: error.statusCode,
+        statusCode: status,
         files: stack,
         message: error.message,
         path: req.originalUrl,

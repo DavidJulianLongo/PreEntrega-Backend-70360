@@ -22,6 +22,17 @@ class UserController {
         }
     }
 
+    async update(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const updateData = req.body;
+            const user = await userService.update(userId, updateData);
+            res.status(200).json({ status: "success", message: "User updated successfully", payload: user });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 

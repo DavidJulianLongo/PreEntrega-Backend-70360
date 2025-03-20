@@ -2,13 +2,14 @@ import express from 'express';
 import { conectMongoDB } from './config/mongoDB.config.js';
 import router from './common/router.js';
 import { errorHandler } from './common/errors/error.handler.js';
+import cookieParser from 'cookie-parser';
 
 
 const app = express();
 
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Rutas de la api
 app.use("/api", router);

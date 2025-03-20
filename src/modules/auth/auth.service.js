@@ -10,19 +10,18 @@ import UserDTO from '../users/user.dto.js';
 class AuthService {
 
     async register(user) {
-        const existingUser = await userDao.getOne({ email: user.email });
+        //Transformmamos los datos con el DTO antes de comparar
+        const userDTO = new UserDTO(user);  
+        const existingUser = await userDao.getOne({ email: userDTO.email });
         if (existingUser) throw new AppError('User already exists', 409);
 
-        // Usamos el DTO para transformar los datos antes de guardarlos
-        const userDTO = new UserDTO(user);  
         userDTO.password = createHash(userDTO.password);
-
         return await userDao.create(userDTO);
     }
 
 
     async login(email, password) {
-        const user = await userDao.getOne({ email });
+        const user = await userDao.getOne({email});
         if (!user) throw new AppError('User not found', 404);
 
         const isValid = isValidPassword(password, user);

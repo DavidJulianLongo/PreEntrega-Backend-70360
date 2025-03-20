@@ -5,7 +5,9 @@ class PetController {
 
     async createPet(req, res) {
         try {
-
+            const pet = req.body;
+            const newPet = await petService.create(pet);
+            res.status(201).json({ status: "success", payload: newPet });
         } catch (error) {
             next(error);
         }
