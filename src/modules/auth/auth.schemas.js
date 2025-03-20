@@ -9,7 +9,7 @@ export const registerSchema = {
             email: z.string().email("Must be a valid email"),
             phone: z.string().regex(/^\+\d{7,15}$/, "Must be a valid international phone number (example: +54xxxxxxxxxx), and without spaces or hyphens"),
             address: z.object({
-                street: z.string(),
+                street: z.string().regex(/^\d+\s[A-Za-z\s]+$/, 'Street must start with house number followed by street name'),
                 city: z.string(),
                 zipCode: z.string()
             }),
@@ -24,7 +24,7 @@ export const loginSchema = {
     body: z.object(
         {
             email: z.string().email("Must be a valid email"),
-            password: z.string().min(6, "Must be at least 6 characters")
+            password: z.string()
         }
     ),
 }

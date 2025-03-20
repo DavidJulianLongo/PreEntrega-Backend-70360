@@ -33,6 +33,17 @@ class UserController {
         }
     }
 
+    async restorePass(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const newPassword = req.body.newPassword;
+            const user = await userService.restorePassword(userId, newPassword); 
+            res.status(200).json({ status: "success", message: "Password updated successfully", payload: user });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 

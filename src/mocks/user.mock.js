@@ -1,4 +1,4 @@
-import { fakerES as faker } from '@faker-js/faker';
+import { fakerEN_US as faker } from '@faker-js/faker';
 import { createHash } from "../common/utils/hashPassword.js";
 
 export const userMock = (amount) => {

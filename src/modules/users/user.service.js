@@ -2,7 +2,8 @@ import { userDao } from './user.dao.js';
 import { userMock } from '../../mocks/user.mock.js';
 import { AppError } from '../../common/errors/appError.js';
 import UserDTO from './user.dto.js';
-
+import { isValidPassword } from '../../common/utils/hashPassword.js';
+import { createHash } from '../../common/utils/hashPassword.js';
 
 
 class UserService {
@@ -43,6 +44,22 @@ class UserService {
         const userDTO = new UserDTO(updateData);
         const updatedUser = await userDao.update(user._id, userDTO);
         return updatedUser
+    }
+
+    async restorePassword(id, newPassword) {
+        const user = await userDao.getOne({ _id: id });
+        if (!user) throw new AppError('User not found', 404);
+
+        //Compara las passwords, para que la nueva no sea igual a la anterior
+        const samePassword = isValidPassword(newPassword, user);
+        if (samePassword) throw new AppError('New password must be different from the current one', 400);
+
+        //Hashea la nueva contraseña y la actualiza
+        const hashedPassword = createHash(newPassword);
+        const updatedUser = await userDao.update(id, { password: hashedPassword });
+        if(!updatedUser) throw new AppError('Error updating password', 500);
+
+        return updatedUser;
     }
 }
 
