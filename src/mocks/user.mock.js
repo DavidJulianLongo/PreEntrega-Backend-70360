@@ -13,6 +13,7 @@ export const userMock = (amount) => {
             phone: faker.phone.number(),
             address: {
                 street: faker.location.streetAddress(),
+                number: faker.location.buildingNumber(),
                 city: faker.location.city(),
                 zipCode: faker.location.zipCode()
             },

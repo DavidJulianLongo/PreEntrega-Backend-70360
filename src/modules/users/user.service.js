@@ -33,13 +33,13 @@ class UserService {
         const user = await userDao.getOne({ _id: id });
         if (!user) throw new AppError('User not found', 404);
 
-        if (updateData.first_name) user.first_name = updateData.first_name;
-        if (updateData.last_name) user.last_name = updateData.last_name;
-        if (updateData.email) user.email = updateData.email;
-        if (updateData.phone) user.phone = updateData.phone;
-        if (updateData.address.street) user.address.street = updateData.address.street;
-        if (updateData.address.city) user.address.city = updateData.address.city;
-        if (updateData.address.zipCode) user.address.zipCode = updateData.address.zipCode;
+        for (const key of Object.keys(updateData)) {
+            if (typeof updateData[key] === "object" && user[key] !== undefined) {
+                user[key] = { ...user[key], ...updateData[key] }; 
+            } else {
+                user[key] = updateData[key];  
+            }
+        }
 
         const userDTO = new UserDTO(updateData);
         const updatedUser = await userDao.update(user._id, userDTO);

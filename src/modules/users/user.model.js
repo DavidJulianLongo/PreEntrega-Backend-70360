@@ -25,6 +25,14 @@ const userSchema = new mongoose.Schema({
                 type: String,
                 required: true
             },
+            number: {
+                type: Number,
+                required: true
+            },
+            apartment: {
+                type: String,
+                default: ""
+            },
             city: {
                 type: String,
                 required: true
