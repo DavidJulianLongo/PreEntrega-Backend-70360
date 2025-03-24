@@ -3,7 +3,7 @@ import { userService } from "./user.service.js";
 
 class UserController {
 
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         try {
             const users = await userService.getAll();
             res.status(200).json({ status: "success", payload: users });
@@ -12,13 +12,13 @@ class UserController {
         }
     }
 
-    async createUsersMock(req, res) {
+    async createUsersMock(req, res, next) {
         try {
             const { amount } = req.params;
             const users = await userService.createUserMock(amount);
             res.status(200).json({ status: "success", payload: users });
         } catch (error) {
-            next(error);
+            next(error); 
         }
     }
 
@@ -29,7 +29,7 @@ class UserController {
             const user = await userService.update(userId, updateData);
             res.status(200).json({ status: "success", message: "User updated successfully", payload: user });
         } catch (error) {
-            next(error);
+            next(error); 
         }
     }
 

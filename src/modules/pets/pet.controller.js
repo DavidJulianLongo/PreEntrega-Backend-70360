@@ -3,7 +3,7 @@ import { petService } from "./pet.service.js";
 
 class PetController {
 
-    async createPet(req, res) {
+    async create(req, res, next) {
         try {
             const pet = req.body;
             const newPet = await petService.create(pet);
@@ -13,13 +13,22 @@ class PetController {
         }
     }
 
-    async createPetMock(req, res) {
+    async createPetMock(req, res, next) {
         try {
             const { amount } = req.params;
             const pets = await petService.createPetMock(amount);
             res.status(200).json({ status: "success", payload: pets });
         } catch (error) {
-           next(error);
+            next(error);
+        }
+    }
+
+    async getAll(req, res, next) {
+        try {
+            const pets = await petService.getAll();
+            res.status(200).json({ status: "success", payload: pets });
+        } catch (error) {
+            next(error);
         }
     }
 

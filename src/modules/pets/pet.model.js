@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const petSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -10,21 +11,18 @@ const petSchema = new mongoose.Schema({
         required: true
     },
     birthDate: {
-        type: String,
+        type: Date,
         required: true
     },
     adopted: {
-        type: String,
-        required: true,
+        type: Boolean,
         default: false
     },
-    owners: {
-        type: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'user',
-            default: []
-        }],
-    }
+    owners: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        default: []
+    }],
 });
 
 export const petModel = mongoose.model("pet", petSchema);

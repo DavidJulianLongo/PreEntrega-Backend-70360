@@ -12,12 +12,13 @@ export const userMock = (amount) => {
             email: faker.internet.email(),
             phone: faker.phone.number(),
             address: {
-                street: faker.location.streetAddress(),
+                street: faker.location.street(),
                 number: faker.location.buildingNumber(),
+                apartment: faker.location.secondaryAddress(),
                 city: faker.location.city(),
                 zipCode: faker.location.zipCode()
             },
-            password: createHash('123456'),
+            password: createHash('!User123456'),
         });
     }
     return users;

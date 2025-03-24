@@ -4,6 +4,7 @@ import { isValidPassword } from '../../common/utils/hashPassword.js';
 import { generateToken } from '../../common/utils/jwt.js';
 import { AppError } from '../../common/errors/appError.js'; 
 import UserDTO from '../users/user.dto.js';
+import { logger } from '../../common/utils/logger.js';
 
 
 
@@ -22,7 +23,7 @@ class AuthService {
 
     async login(email, password) {
         const user = await userDao.getOne({email});
-        if (!user) throw new AppError('User not found', 404);
+        if (!user) throw new AppError('Invalid email or password', 401);
 
         const isValid = isValidPassword(password, user);
         if (!isValid) throw new AppError('Invalid email or password', 401);

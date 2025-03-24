@@ -1,8 +1,9 @@
-
 export default class UserDTO {
-    constructor(user = {}) {
-        this.first_name = (user.first_name || '').trim();
-        this.last_name = (user.last_name || '').trim();
+
+    constructor(user) {
+        
+        this.first_name = user.first_name || '';
+        this.last_name = user.last_name || '';
         this.email = (user.email || '').toLowerCase().trim();
         this.phone = (user.phone || '').trim();
         this.password = user.password && user.password.trim() !== '' ? user.password.trim() : undefined;

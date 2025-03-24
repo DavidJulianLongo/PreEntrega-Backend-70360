@@ -1,3 +1,5 @@
+import { logger } from "../utils/logger.js";
+
 export const validateSchema = (schema) => {
     return (req, res, next) => {
         const errors = [];
@@ -12,6 +14,8 @@ export const validateSchema = (schema) => {
                         message: error.message
                     }))
                 );
+
+                logger.error(`Validation Errors: ${JSON.stringify(errors, null, 2)}`);
             } else {
                 req.body = result.data;
             }
@@ -28,6 +32,8 @@ export const validateSchema = (schema) => {
                         message: error.message
                     }))
                 );
+
+                logger.error(`Validation Errors: ${JSON.stringify(errors, null, 2)}`);
             } else {
                 req.params = result.data;
             }
