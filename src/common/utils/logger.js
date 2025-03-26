@@ -11,8 +11,6 @@ export const logger = createLogger({
     format: combine(colorize(), timestamp({ format: "DD-MM-YYYY HH:mm:ss" }), customFormat),
     transports: [
         new transports.Console(),
-        new transports.File({ filename: "logs/combine.log" }),
         new transports.File({ filename: "logs/errors.log", level: "error" }),
-        new transports.File({ filename: "logs/debug.log", level: "debug" })
     ]
 })

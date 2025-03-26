@@ -4,8 +4,6 @@ import { isValidPassword } from '../../common/utils/hashPassword.js';
 import { generateToken } from '../../common/utils/jwt.js';
 import { AppError } from '../../common/errors/appError.js'; 
 import UserDTO from '../users/user.dto.js';
-import { logger } from '../../common/utils/logger.js';
-
 
 
 class AuthService {
