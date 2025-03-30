@@ -18,11 +18,10 @@ const petSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    owners: [{
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
-        default: []
-    }],
+    },
 });
 
 export const petModel = mongoose.model("pet", petSchema);

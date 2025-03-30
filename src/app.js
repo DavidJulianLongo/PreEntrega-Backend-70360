@@ -9,7 +9,7 @@ import { logger } from './common/utils/logger.js';
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(compression({ brotli: { enabled: true, zlib: {} } }))

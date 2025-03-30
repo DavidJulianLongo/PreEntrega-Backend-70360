@@ -7,7 +7,7 @@ class UserDao {
     }
 
     async getAll() {
-        return await userModel.find().populate('pets');
+        return await userModel.find();
     }
 
     async getOne(query) {

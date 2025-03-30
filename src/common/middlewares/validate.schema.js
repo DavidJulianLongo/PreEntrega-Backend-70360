@@ -14,12 +14,10 @@ export const validateSchema = (schema) => {
                         message: error.message
                     }))
                 );
-
-                logger.error(`Validation Errors: ${JSON.stringify(errors, null, 2)}`);
             } else {
                 req.body = result.data;
             }
-            
+
         };
 
         // Validar req.params
@@ -32,13 +30,26 @@ export const validateSchema = (schema) => {
                         message: error.message
                     }))
                 );
-
-                logger.error(`Validation Errors: ${JSON.stringify(errors, null, 2)}`);
             } else {
                 req.params = result.data;
             }
         };
 
+        //Validar req.query 
+        if (schema.query) {
+            const result = schema.query.safeParse(req.query);
+
+            if (!result.success) {
+                errors.push(
+                    ...result.error.errors.map((err) => ({
+                        field: `query.${err.path.join(".")}`,
+                        message: err.message,
+                    }))
+                );
+            } else {
+                req.query = result.data;
+            }
+        }
 
         if (errors.length > 0) return res.status(400).json({ error: errors });
         next();

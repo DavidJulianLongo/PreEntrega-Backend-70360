@@ -10,8 +10,14 @@ class UserService {
 
     async getAll() {
         const users = await userDao.getAll();
-        if (!users) throw new Error('Not users found');
+        if (!users) throw new AppError('Not users found', 404);
         return users;
+    }
+
+    async getOne(id) {
+        const user = userDao.getOne({ _id: id });
+        if(!user) throw new AppError('User not found', 404);
+        return user
     }
 
 
@@ -35,9 +41,9 @@ class UserService {
 
         for (const key of Object.keys(updateData)) {
             if (typeof updateData[key] === "object" && user[key] !== undefined) {
-                user[key] = { ...user[key], ...updateData[key] }; 
+                user[key] = { ...user[key], ...updateData[key] };
             } else {
-                user[key] = updateData[key];  
+                user[key] = updateData[key];
             }
         }
 
@@ -57,7 +63,7 @@ class UserService {
         //Hashea la nueva contraseña y la actualiza
         const hashedPassword = createHash(newPassword);
         const updatedUser = await userDao.update(id, { password: hashedPassword });
-        if(!updatedUser) throw new AppError('Error updating password', 500);
+        if (!updatedUser) throw new AppError('Error updating password', 500);
 
         return updatedUser;
     }

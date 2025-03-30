@@ -9,4 +9,6 @@ const router = Router();
 router.post('/mocks/:amount', validateSchema(petMockSchema), petController.createPetMock);
 router.post('/register', validateSchema(registerSchema), petController.create);
 router.get('/', petController.getAll);
+
+
 export default router;

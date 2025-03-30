@@ -6,7 +6,6 @@ export default class PetDTO {
         this.type = pet.type;
         this.birthDate = pet.birthDate;
         this.adopted = pet.adopted;
-        this.owners = pet.owner;
     }
 }
 
