@@ -1,11 +1,11 @@
+import dayjs from "dayjs";
+
 export default class PetDTO {
 
-    constructor(pet) {
-
-        this.name = pet.name;
-        this.type = pet.type;
-        this.birthDate = pet.birthDate;
-        this.adopted = pet.adopted;
+   constructor({ name, type, birthDate}) {
+    this.name = name.trim();
+    this.type = type.trim().toLowerCase();
+    this.birthDate = dayjs(birthDate).startOf('day').toDate();
     }
 }
 

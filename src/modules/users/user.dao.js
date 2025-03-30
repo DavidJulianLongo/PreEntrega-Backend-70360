@@ -11,7 +11,7 @@ class UserDao {
     }
 
     async getOne(query) {
-        return await userModel.findOne(query);
+        return await userModel.findOne(query).populate("pets");
     }
 
     async update(id, data) {

@@ -14,5 +14,6 @@ export default class UserDTO {
             city: (user.address?.city || '').trim(),
             zipCode: (user.address?.zipCode || '').trim()
         };
+        
     }
 }
