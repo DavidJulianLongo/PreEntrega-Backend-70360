@@ -9,13 +9,14 @@ import UserDTO from '../users/user.dto.js';
 class AuthService {
 
     async register(user) {
-        //Transformmamos los datos con el DTO antes de comparar
-        const userDTO = new UserDTO(user);  
+        const hashedPassword = createHash(user.password);
+        const userDTO = new UserDTO({ ...user, password: hashedPassword });  
+
         const existingUser = await userDao.getOne({ email: userDTO.email });
         if (existingUser) throw new AppError('User already exists', 409);
 
-        userDTO.password = createHash(userDTO.password);
-        return await userDao.create(userDTO);
+        const newUser = await userDao.create({ ...userDTO, password: hashedPassword });
+        return newUser;
     }
 
 

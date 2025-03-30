@@ -8,19 +8,6 @@ import { createHash } from '../../common/utils/hashPassword.js';
 
 class UserService {
 
-    async getAll() {
-        const users = await userDao.getAll();
-        if (!users) throw new AppError('Not users found', 404);
-        return users;
-    }
-
-    async getOne(id) {
-        const user = userDao.getOne({ _id: id });
-        if(!user) throw new AppError('User not found', 404);
-        return user
-    }
-
-
     async createUserMock(amount) {
         const users = userMock(amount);
         await userDao.removeAll();
@@ -52,6 +39,7 @@ class UserService {
         return updatedUser
     }
 
+    
     async restorePassword(id, newPassword) {
         const user = await userDao.getOne({ _id: id });
         if (!user) throw new AppError('User not found', 404);
@@ -66,6 +54,21 @@ class UserService {
         if (!updatedUser) throw new AppError('Error updating password', 500);
 
         return updatedUser;
+    }
+
+    async getAll() {
+        const users = await userDao.getAll();
+        if (!users) throw new AppError('Not users found', 404);
+
+        const userDTOs = users.map(user => new UserDTO(user.toObject()));
+        return userDTOs;
+    }
+
+    async getOne(id) {
+        const user = await userDao.getOne({ _id: id });
+        if(!user) throw new AppError('User not found', 404);
+
+        return new UserDTO(user);
     }
 }
 

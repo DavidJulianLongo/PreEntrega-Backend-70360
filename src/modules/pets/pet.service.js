@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 class PetService {
 
     async create(data) {
-        const formattedBirthDate = dayjs(data.birthDate).startOf('day').toDate(); 
+        const formattedBirthDate = dayjs(data.birthDate).startOf('day').toDate();
         const newPet = new PetDTO({ ...data, birthDate: formattedBirthDate });
 
         // Verifica si ya existe una mascota con los mismos detalles
@@ -25,17 +25,16 @@ class PetService {
         // Formatea la fecha de nacimiento para evitar diferencias en la hora
         const petsDTO = pets.map(pet => {
             const formattedBirthDate = dayjs(pet.birthDate).startOf('day').format('YYYY-MM-DD');
-            return new PetDTO({
-                ...pet,
-                birthDate: formattedBirthDate
-            });
+            return new PetDTO({ ...pet, birthDate: formattedBirthDate });
         });
 
         return await petDao.create(petsDTO);
     }
 
     async getAll() {
-        return await petDao.getAll();
+        const pets = await petDao.getAll();
+        if (!pets) throw new AppError("Pets nor found", 404);
+        return pets;
     }
 
 }

@@ -16,7 +16,6 @@ export const userMock = (amount) => {
                 number: faker.location.buildingNumber(),
                 apartment: faker.location.secondaryAddress(),
                 city: faker.location.city(),
-                zipCode: faker.location.zipCode()
             },
             password: createHash('!User123456'),
         });
