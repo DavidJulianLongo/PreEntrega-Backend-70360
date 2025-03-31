@@ -60,8 +60,8 @@ class UserService {
         const users = await userDao.getAll();
         if (!users) throw new AppError('Not users found', 404);
 
-        const userDTOs = users.map(user => new UserDTO(user.toObject()));
-        return userDTOs;
+        const usersDTOs = users.map(user => new UserDTO(user));
+        return usersDTOs;
     }
 
     async getOne(id) {
