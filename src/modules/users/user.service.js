@@ -34,8 +34,8 @@ class UserService {
             }
         }
 
-        const userDTO = new UserDTO(updateData);
-        const updatedUser = await userDao.update(user._id, userDTO);
+
+        const updatedUser = await userDao.update(user._id, updateData);
         return updatedUser
     }
 
@@ -68,7 +68,7 @@ class UserService {
         const user = await userDao.getOne({ _id: id });
         if(!user) throw new AppError('User not found', 404);
 
-        return new UserDTO(user);
+        return user;
     }
 }
 
