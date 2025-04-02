@@ -8,5 +8,6 @@ export default class OwnerDTO {
         this.address = owner.address;
         this.role = owner.role;
         this.pets = owner.pets;
+        //Omitimos la pass del owner(usuario)
     }
 }

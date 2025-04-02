@@ -11,7 +11,7 @@ class PetDao {
     }
 
     async getOne(query) {
-        return await petModel.findOne(query);
+        return await petModel.findOne(query).populate("owner");
     }
 
     async update(id, data) {

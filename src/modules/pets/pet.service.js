@@ -3,6 +3,7 @@ import { petMock } from "../../mocks/pet.mock.js";
 import { AppError } from "../../common/errors/appError.js";
 import PetDTO from "./pet.dto.js";
 import dayjs from "dayjs";
+import OwnerDTO from "../adoptions/adoptions.dto.js";
 
 
 class PetService {
@@ -33,8 +34,16 @@ class PetService {
 
     async getAll() {
         const pets = await petDao.getAll();
-        if (!pets) throw new AppError("Pets nor found", 404);
+        if (!pets) throw new AppError("Pets not found", 404);
         return pets;
+    }
+
+    async getOne(id) {
+        const pet = await petDao.getOne({ _id: id });
+        if (!pet) throw new AppError("Pet not found", 404);
+
+        if (pet.owner) pet.owner = new OwnerDTO(pet.owner);
+        return pet
     }
 
 }

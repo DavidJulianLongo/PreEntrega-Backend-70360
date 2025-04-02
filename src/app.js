@@ -5,6 +5,8 @@ import { errorHandler } from './common/errors/error.handler.js';
 import cookieParser from 'cookie-parser';
 import compression from 'express-compression';
 import { logger } from './common/utils/logger.js';
+import swaggerUiExpress from "swagger-ui-express";
+import { specs } from './config/swagger.config.js';
 
 
 const app = express();
@@ -16,6 +18,9 @@ app.use(compression({ brotli: { enabled: true, zlib: {} } }))
 
 // Rutas de la api
 app.use("/api", router);
+
+//Documentation
+app.use("/api/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 // Middleware de errores
 app.use(errorHandler);

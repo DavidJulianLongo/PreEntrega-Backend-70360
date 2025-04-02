@@ -36,7 +36,7 @@ class UserService {
 
 
         const updatedUser = await userDao.update(user._id, updateData);
-        return updatedUser
+        return new UserDTO(updatedUser);
     }
 
     
@@ -53,8 +53,9 @@ class UserService {
         const updatedUser = await userDao.update(id, { password: hashedPassword });
         if (!updatedUser) throw new AppError('Error updating password', 500);
 
-        return updatedUser;
+        return new UserDTO(updatedUser);
     }
+
 
     async getAll() {
         const users = await userDao.getAll();
@@ -68,7 +69,7 @@ class UserService {
         const user = await userDao.getOne({ _id: id });
         if(!user) throw new AppError('User not found', 404);
 
-        return user;
+        return new UserDTO(user);
     }
 }
 
