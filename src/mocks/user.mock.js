@@ -5,6 +5,15 @@ export const userMock = (amount) => {
 
     const users = [];
 
+    // genera un array con 10 "admin" y el resto del parametro amount serán "user"
+    const roles = [
+        ...Array(10).fill("admin"),
+        ...Array(amount - 10).fill("user")
+    ];
+
+    // mezcla los roles para que no estén todos juntos
+    const shuffledRoles = faker.helpers.shuffle(roles);
+
     for (let i = 0; i < amount; i++) {
         users.push({
             first_name: faker.person.firstName(),
@@ -18,6 +27,7 @@ export const userMock = (amount) => {
                 city: faker.location.city(),
             },
             password: createHash('!User123456'),
+            role: shuffledRoles[i], 
         });
     }
     return users;

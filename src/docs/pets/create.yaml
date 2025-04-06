@@ -1,0 +1,60 @@
+paths:
+  /api/pets/register:
+    post:
+      summary: Create a new pet
+      tags:
+        - Pets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - type
+                - birthDate
+                - sex
+                - sterilized
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                birthDate:
+                  type: string
+                  format: date
+                sex:
+                  type: string
+                  enum: [male, female]
+                sterilized:
+                  type: boolean
+      responses:
+        201:
+          description: Successfully created pet.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        500:
+          description: Something went wrong.
+
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        sex:
+          type: string
+          enum: [male, female]
+        sterilized:
+          type: boolean
+              
+            

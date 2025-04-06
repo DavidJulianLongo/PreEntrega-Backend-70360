@@ -46,6 +46,24 @@ class PetService {
         return pet
     }
 
+    async update(id, updateData){
+        if (Object.keys(updateData).length === 0) throw new AppError('No data to update', 400);
+
+        const pet = await petDao.getOne({ _id: id });
+        if (!pet) throw new AppError("Pet not found", 404);
+
+        for (const key of Object.keys(updateData)) {
+            if (typeof updateData[key] === "object" && pet[key] !== undefined) {
+                pet[key] = { ...pet[key], ...updateData[key] };
+            } else {
+                pet[key] = updateData[key];
+            }
+        }
+
+        const updatedPet = await petDao.update(pet._id, updateData);
+        return new PetDTO(updatedPet);
+    }
+
 }
 
 export const petService = new PetService();

@@ -42,6 +42,18 @@ class PetController {
         }
     }
 
+    async update(req, res, next) {
+        try {
+            const {petId} = req.params;
+            const updateData = req.body;
+            const pet = await petService.update(petId, updateData);
+            res.status(200).json({ status: "success", message: "Pet updated successfully", payload: pet });
+        } catch (error) {
+            next(error);
+
+        }
+    }
+
 }
 
 

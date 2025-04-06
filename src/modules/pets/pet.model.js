@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { boolean } from "zod";
 
 
 const petSchema = new mongoose.Schema({
@@ -13,6 +14,14 @@ const petSchema = new mongoose.Schema({
     birthDate: {
         type: Date,
         required: true
+    },
+    sex: {
+        type: String,
+        required: true,
+    },
+    sterilized: {
+        type: Boolean,
+        required: true,
     },
     adopted: {
         type: Boolean,

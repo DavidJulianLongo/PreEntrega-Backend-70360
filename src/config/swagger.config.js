@@ -9,7 +9,7 @@ const swaggerOptions = {
             description: "API adoptions"
         },
     },
-    apis: ["/src/docs/**/*.yaml"]
+    apis: ["./src/docs/**/*.yaml"]
 }
 
 export const specs = swaggerJSDoc(swaggerOptions);

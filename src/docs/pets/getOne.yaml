@@ -1,0 +1,70 @@
+paths:
+  /api/pets/{id}:
+    get:
+      summary: Get a pet by ID
+      description: Retrieve a pet's details using its unique ID.
+      tags:
+        - Pets
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier for the pet.
+          schema:
+            type: string
+            format: ObjectId
+            description: The ID of the pet to retrieve.
+      responses:
+        200:
+          description: Successfully retrieved pet details.
+          contents:
+            aplication/json:
+              schema:
+                $ref: '#/components/schemas/pet' 
+        404:
+          description: Pet not found.
+components:
+  schemas:
+    pet:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Unique identifier for the pet.
+        name:
+          type: string
+          description: Name of the pet.
+        type: 
+          type: string
+          description: Type of the pet (e.g., dog, cat).
+        birthdatee:
+          type: date
+          description: Birthdate of the pet.
+        adopted:
+          type: boolean
+          description: Indicates if the pet is adopted.
+        owner:
+          type: Objectid
+          description: Unique identifier for the owner of the pet.
+      example:
+        _id: 67eafdee67c7a61cddb9dce1
+        name: Hank
+        type: gato
+        birthDate: 2022-05-18T03:00:00.000Z
+        adopted: true
+        __v: 0
+        owner:
+          id: 67eafd92e30f5fb1a572db1a
+          first_name: Amya
+          last_name: Dicki
+          email: vernice.wolff86@gmail.com
+          phone: "+182682128666937"
+          address:
+            street: Lincoln Highway
+            number: 98889
+            apartment: Suite 136
+            city: Port Abigayleport
+          role: user
+          pets:
+            - 67eafdee67c7a61cddb9dce1
+            - 67eafdee67c7a61cddb9dce3
