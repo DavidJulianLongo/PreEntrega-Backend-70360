@@ -1,0 +1,63 @@
+paths:
+  /api/pets/update/{id}:
+    put:
+      summary: Update a pet
+      tags:
+        - Pets
+      parameters:
+        - in: path
+          name: id
+         
+          description: Unique identifier for the pet.
+          schema:
+            type: string
+            format: ObjectId
+            description: The ID of the pet to retrieve.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                birthDate:
+                  type: string
+                  format: date
+                sex:
+                  type: string
+                  enum: [male, female]
+                sterilized:
+                  type: boolean
+      responses:
+        200:
+          description: Pet updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        500:
+          description: Something went wrong.
+
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        sex:
+          type: string
+          enum: [male, female]
+        sterilized:
+          type: boolean
+              
+            

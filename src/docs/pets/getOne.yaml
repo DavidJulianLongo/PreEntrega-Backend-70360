@@ -6,8 +6,8 @@ paths:
       tags:
         - Pets
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: id
           required: true
           description: Unique identifier for the pet.
           schema:

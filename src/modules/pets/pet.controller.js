@@ -44,13 +44,22 @@ class PetController {
 
     async update(req, res, next) {
         try {
-            const {petId} = req.params;
+            const { id } = req.params;
             const updateData = req.body;
-            const pet = await petService.update(petId, updateData);
+            const pet = await petService.update(id, updateData);
             res.status(200).json({ status: "success", message: "Pet updated successfully", payload: pet });
         } catch (error) {
             next(error);
+        }
+    }
 
+    async remove(req, res, next) {
+        try {
+            const { id } = req.params;
+            const pet = await petService.remove(id);
+            res.status(200).json({ status: "success", message: "Pet removed successfully", payload: pet });
+        } catch (error) {
+            next(error);
         }
     }
 

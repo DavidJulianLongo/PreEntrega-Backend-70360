@@ -10,7 +10,8 @@ router.post('/mocks/:amount', validateSchema(petMockSchema), petController.creat
 router.post('/register', validateSchema(registerSchema), petController.create);
 router.get('/', petController.getAll);
 router.get('/:id', petController.getOne);
-router.put('/:petId', validateSchema(registerSchema), petController.update);
+router.put('/:id', validateSchema(registerSchema), petController.update);
+router.delete('/:id', petController.remove);
 
 
 export default router;
