@@ -1,28 +1,19 @@
 paths:
-  /api/pets/{id}:
+  /api/pets/:
     get:
-      summary: Get a pet by ID
-      description: Retrieve a pet's details using its unique ID.
+      summary: Get all pets
+      description: Retrieve a list of all pets.
       tags:
         - Pets
-      parameters:
-        - in: path
-          name: id
-          required: true
-          description: Unique identifier for the pet.
-          schema:
-            type: string
-            format: ObjectId
-            description: The ID of the pet to retrieve.
       responses:
         200:
-          description: Successfully retrieved pet details.
+          description: Successfully retrieved list of pets.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/pet' 
         404:
-          description: Pet not found.
+          description: Pets not found.
 
 
           

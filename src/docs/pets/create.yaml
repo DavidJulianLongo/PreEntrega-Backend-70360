@@ -35,13 +35,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: '#/components/schemas/pet'
         500:
           description: Something went wrong.
 
+
 components:
   schemas:
-    Pet:
+    pet:
       type: object
       properties:
         name:

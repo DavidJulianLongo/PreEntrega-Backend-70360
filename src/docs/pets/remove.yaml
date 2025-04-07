@@ -1,8 +1,8 @@
 paths:
   /api/pets/{id}:
-    get:
-      summary: Get a pet by ID
-      description: Retrieve a pet's details using its unique ID.
+    delete:
+      summary: Delete a pet by ID
+      description: Delete a pet's details using its unique ID.
       tags:
         - Pets
       parameters:
@@ -13,10 +13,10 @@ paths:
           schema:
             type: string
             format: ObjectId
-            description: The ID of the pet to retrieve.
+            description: The ID of the pet.
       responses:
         200:
-          description: Successfully retrieved pet details.
+          description: Pet deleted successfully.
           content:
             application/json:
               schema:

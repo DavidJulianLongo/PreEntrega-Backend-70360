@@ -35,15 +35,7 @@ class PetService {
             await petDao.create(newPet);
         }
 
-
         return await petDao.create(pets);
-
-        
-        // // Formatea la fecha de nacimiento para evitar diferencias en la hora
-        // const petsDTO = pets.map(pet => {
-        //     const formattedBirthDate = dayjs(pet.birthDate).startOf('day').format('YYYY-MM-DD');
-        //     return new PetDTO({ ...pet, birthDate: formattedBirthDate });
-        // });
     }
 
     async getAll() {
@@ -74,7 +66,7 @@ class PetService {
             }
         }
 
-        const updatedPet = await petDao.update(pet._id, updateData);
+        const updatedPet = await petDao.update(pet._id, pet);
         return new PetDTO(updatedPet);
     }
 

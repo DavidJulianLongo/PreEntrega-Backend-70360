@@ -35,7 +35,7 @@ class UserService {
         }
 
 
-        const updatedUser = await userDao.update(user._id, updateData);
+        const updatedUser = await userDao.update(user._id, user);
         return new UserDTO(updatedUser);
     }
 

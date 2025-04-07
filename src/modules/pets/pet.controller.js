@@ -56,8 +56,8 @@ class PetController {
     async remove(req, res, next) {
         try {
             const { id } = req.params;
-            const pet = await petService.remove(id);
-            res.status(200).json({ status: "success", message: "Pet removed successfully", payload: pet });
+            const removedPet = await petService.remove(id);
+            res.status(200).json({ status: "success", message: "Pet deleted successfully", payload: removedPet });
         } catch (error) {
             next(error);
         }
