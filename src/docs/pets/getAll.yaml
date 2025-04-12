@@ -2,7 +2,7 @@ paths:
   /api/pets/:
     get:
       summary: Get all pets
-      description: Retrieve a list of all pets.
+      description: Retrieve a array of all pets.
       tags:
         - Pets
       responses:
@@ -11,6 +11,7 @@ paths:
           content:
             application/json:
               schema:
+                type: array
                 $ref: '#/components/schemas/pet' 
         404:
           description: Pets not found.
