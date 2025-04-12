@@ -4,9 +4,9 @@ const swaggerOptions = {
     swaggerDefinition: {
         openapi: "3.0.1",
         info: {
-            title: "Documentation of API adoptions",
+            title: "API adoptions",
             version: "1.0.0",
-            description: "API adoptions"
+            description: "API documentation for adoptions",
         },
     },
     apis: ["./src/docs/**/*.yaml"]
