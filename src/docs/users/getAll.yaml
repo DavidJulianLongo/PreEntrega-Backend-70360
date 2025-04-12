@@ -49,7 +49,7 @@ components:
             street:
               type: string
               description: Street name.
-              example: 123 Main St
+              example: Main St
             number:
               type: number
               description: Street number.

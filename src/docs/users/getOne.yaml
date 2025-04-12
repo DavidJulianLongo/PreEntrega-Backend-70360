@@ -1,0 +1,25 @@
+paths:
+  /api/users/{id}:
+    get:
+      summary: Get a user by ID
+      description: Retrieve a user's details using its unique ID.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Unique identifier for the user.
+          schema:
+            type: string
+            format: ObjectId
+            description: The ID of the user to retrieve.
+      responses:
+        200:
+          description: Successfully retrieved user details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user' 
+        404:
+          description: User not found.

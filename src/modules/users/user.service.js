@@ -21,8 +21,6 @@ class UserService {
     }
 
     async update(id, updateData) {
-        if (Object.keys(updateData).length === 0) throw new AppError('No data to update', 400);
-
         const user = await userDao.getOne({ _id: id });
         if (!user) throw new AppError('User not found', 404);
 

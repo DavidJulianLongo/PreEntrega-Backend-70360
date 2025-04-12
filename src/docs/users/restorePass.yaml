@@ -1,0 +1,63 @@
+paths:
+  /api/users/restore-pass:
+    put:
+      summary: Update a user password
+      description: Update the logged-in user's password. This operation requires authentication. The token is in a signedCookie.
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  current_password:
+                    type: string
+                    example: "!User123456"
+                  new_password:
+                    type: string
+                    example: "!NewUser123456"
+      responses:
+        200:
+          description: User password updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_name:
+                    type: string
+                    example: John
+                  last_name:
+                    type: string
+                    example: Doe
+                  email:
+                    type: string
+                    example: user@gmail.com
+                  phone:
+                    type: string
+                    example: "+1234567890"
+                  address:
+                    type: object
+                    properties:
+                      street:
+                        type: string
+                        example: Main St
+                      number:
+                        type: number
+                        example: 91218
+                      apartment:
+                        type: string
+                        example: Suite 333
+                      city:
+                        type: string
+                        example: Theodorefort
+        401:
+          description: Invalid token, please login. 
+        500:
+          description: Something went wrong.
+
+
