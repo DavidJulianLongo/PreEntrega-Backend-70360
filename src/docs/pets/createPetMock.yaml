@@ -1,31 +1,30 @@
 paths:
-  /api/pets/{id}:
-    delete:
-      summary: Delete pet
-      description: Delete a pet's details using its unique ID.
+  /api/pets/mocks/{amount}:
+    post:
+      summary: Create mock pets
+      description: Create a specified number of mock pets for testing purposes.
       tags:
         - Pets
       parameters:
         - in: path
-          name: id
+          name: amount
           required: true
-          description: Unique identifier for the pet.
+          description: Number of mock pets to create.
           schema:
-            type: string
-            format: ObjectId
-            description: The ID of the pet.
+            type: integer
+            format: int32
+            description: The number of mock pets to create. 
       responses:
         200:
-          description: Pet deleted successfully.
+          description: Pet updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/pet' 
-        404:
-          description: Pet not found.
+                $ref: '#/components/schemas/pet'
+        500:
+          description: Something went wrong.
 
 
-          
 components:
   schemas:
     pet:

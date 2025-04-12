@@ -2,7 +2,6 @@ import { petDao } from "./pet.dao.js";
 import { petMock } from "../../mocks/pet.mock.js";
 import { AppError } from "../../common/errors/appError.js";
 import PetDTO from "./pet.dto.js";
-
 import OwnerDTO from "../adoptions/adoptions.dto.js";
 
 
