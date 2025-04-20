@@ -1,0 +1,43 @@
+paths:
+  /api/auth/login:
+    post:
+      summary: User Login
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user457456@gmail.com
+                password:
+                  type: string
+                  format: password
+                  example: "!User123456"
+              required:
+                - email
+                - password
+      responses:
+        "200":
+          description: User logged in successfully
+          headers:
+            Set-Cookie:
+              description: JWT token stored in signed-cookie
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login successful
+                  token: 
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        "401":
+          description: Invalid email or password

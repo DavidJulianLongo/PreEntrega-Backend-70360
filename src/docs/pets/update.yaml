@@ -40,8 +40,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/pet'
-        500:
-          description: Something went wrong.
+        404:
+          description: Pet not found.
 
 
 components:
