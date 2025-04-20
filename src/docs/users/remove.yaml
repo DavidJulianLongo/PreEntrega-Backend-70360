@@ -1,0 +1,84 @@
+paths:
+  /api/users/{id}:
+    delete:
+      summary: Remove user by ID
+      description: Remove a user using its unique ID.
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Unique identifier for the user.
+          schema:
+            type: string
+            format: ObjectId
+            description: The ID of the user to remove.
+      responses:
+        200:
+          description: User deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: MongoDB ObjectId.
+                    example: 643fc9f1a23b9c1234567890
+                  first_name:
+                    type: string
+                    description: User name.
+                    example: John
+                  last_name:
+                    type: string
+                    description: User last name.
+                    example: Doe
+                  email:
+                    type: string
+                    description: User email.
+                    example: user@gmail.com
+                  phone:
+                    type: string
+                    description: User phone number.
+                    example: "+1234567890"
+                  address:
+                    type: object
+                    description: User address.
+                    properties:
+                      street:
+                        type: string
+                        description: Street name.
+                        example: Main St
+                      number:
+                        type: number
+                        description: Street number.
+                        example: 456
+                      apartment:
+                        type: string
+                        description: Apartment number.
+                        example: 4th A
+                      city:
+                        type: string
+                        description: City name.
+                        example: Springfield  
+                  role:
+                    type: string
+                    description: User role (default, "user").
+                    example: user
+                  pets:
+                    type: array
+                    description: Array of Pet IDs owned by the user.
+                    items:
+                      type: string
+                      format: ObjectId
+                      example: 643fc9f1a23b9c1234567890
+        404:
+          description: User not found.
+
+
+
+   
+            

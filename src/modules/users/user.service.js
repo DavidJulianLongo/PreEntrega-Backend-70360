@@ -69,6 +69,14 @@ class UserService {
 
         return new UserDTO(user);
     }
+
+    async remove(id) {
+        const user = await userDao.getOne({ _id: id });
+        if (!user) throw new AppError('User not found', 404);
+
+        await userDao.remove(id);
+        return new UserDTO(user);
+    }
 }
 
 export const userService = new UserService();

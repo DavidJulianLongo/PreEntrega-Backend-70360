@@ -55,6 +55,16 @@ class UserController {
         }
     }
 
+    async remove(req, res, next) {
+        try {
+            const { id } = req.params;
+            const user = await userService.remove(id);
+            res.status(200).json({ status: "success", message: "User deleted successfully", payload: user });
+        } catch (error) {
+            next(error);
+        }
+    }
+    
 }
 
 
