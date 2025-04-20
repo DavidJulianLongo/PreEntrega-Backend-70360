@@ -24,14 +24,23 @@ class AdoptionController {
 
     async create(req, res, next) {
         try {
-            const { pet, owner } = req.body;
-            const newAdoption = await adoptionService.create(pet, owner);
+            const { petId, ownerId } = req.body;
+            const newAdoption = await adoptionService.create(petId, ownerId);
             res.status(201).json({ status: "Succes", payload: newAdoption });
         } catch (error) {
             next(error)
         }
     }
 
+    async remove(req, res, next) {
+        try {
+            const { id } = req.params;
+            const adoption = await adoptionService.remove(id);
+            res.status(200).json({ status: "Succes", message: "Adoption remove successfully" });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export const adoptionController = new AdoptionController();

@@ -9,6 +9,7 @@ const router = Router();
 router.post("/", validateSchema(adoptionSchema), adoptionController.create);
 router.get("/", adoptionController.getAll);
 router.get("/:id", validateSchema(objectIdParamsSchema), adoptionController.getById);
+router.delete("/:id", validateSchema(objectIdParamsSchema), adoptionController.remove);
 
 
 
