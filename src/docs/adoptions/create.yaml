@@ -1,0 +1,66 @@
+paths:
+  /api/adoptions:
+    post:
+      summary: Create a new adoption
+      description: Allows the creation of a new adoption by associating a pet with an owner.
+      tags:
+        - Adoptions
+      requestBody:
+        description: Data required to create a new adoption
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                petId:
+                  type: string
+                  description: ID of the pet to be adopted.
+                  example: "68054b44ef8a07806c77fc90"
+                ownerId:
+                  type: string
+                  description: ID of the owner adopting the pet.
+                  example: "605c72ef1532072b8c1e0f50"
+              required:
+                - petId
+                - ownerId
+      responses:
+        "201":
+          description: Adoption created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: ID of the created adoption
+                    example: "63e02b6f8d2c9c0e90f4e9c2"
+                  pet:
+                    type: string
+                    description: ID of the adopted pet
+                    example: "68054b44ef8a07806c77fc90"
+                  owner:
+                    type: string
+                    description: ID of the owner who adopted the pet
+                    example: "605c72ef1532072b8c1e0f50"
+        "404":
+          description: Pet or owner not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Pet not found"
+        "409":
+          description: Conflict (pet has already been adopted)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Pet has already been adopted"

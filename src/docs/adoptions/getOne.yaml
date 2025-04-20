@@ -1,0 +1,25 @@
+paths:
+  /api/adoptions/{id}:
+    get:
+      summary: Get a single adoption by ID
+      description: Returns the details of a specific adoption, including the pet and owner information.
+      tags:
+        - Adoptions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the adoption to retrieve
+      responses:
+        "200":
+          description: Successfully retrieved the adoption
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdoptionResponse'
+        "404":
+          description: Adoption not found
+        "500":
+          description: Internal server error

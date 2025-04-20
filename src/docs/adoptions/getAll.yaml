@@ -1,0 +1,142 @@
+paths:
+  /api/adoptions:
+    get:
+      summary: Get all adoptions
+      description: Returns a list of all adoptions in the database.
+      tags:
+        - Adoptions
+      responses:
+        "200":
+          description: Successfully retrieved list of adoptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pet:
+                      type: string
+                      description: ID of the pet to be adopted
+                      example: "68054b44ef8a07806c77fc90"
+                    owner:
+                      type: string
+                      description: ID of the owner adopting the pet
+                      example: "605c72ef1532072b8c1e0f50"
+                    _id:
+                      type: string
+                      description: ID of the adoption
+                      example: "63e02b6f8d2c9c0e90f4e9c2"
+        "404":
+          description: No adoptions found
+        "500":
+          description: Internal server error
+
+
+components:
+  schemas:
+    AdoptionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Operation status
+          example: Success
+        payload:
+          type: object
+          description: Adoption information
+          properties:
+            _id:
+              type: string
+              description: Adoption ID
+              example: "680566df6ff696c0a9d9e4ee"
+            pet:
+              type: object
+              description: Adopted pet information
+              properties:
+                _id:
+                  type: string
+                  description: Pet ID
+                  example: "68054b44ef8a07806c77fc90"
+                name:
+                  type: string
+                  description: Name of the pet
+                  example: "Ace"
+                type:
+                  type: string
+                  description: Type of animal (e.g., dog, cat)
+                  example: "cat"
+                birthDate:
+                  type: string
+                  description: Birth date of the pet
+                  example: "2024-11-27T00:00:00.000Z"
+                sex:
+                  type: string
+                  description: Sex of the pet
+                  example: "female"
+                sterilized:
+                  type: boolean
+                  description: Indicates if the pet is sterilized
+                  example: false
+                adopted:
+                  type: boolean
+                  description: Indicates if the pet is already adopted
+                  example: true
+                owner:
+                  type: string
+                  description: Owner ID
+                  example: "68054b3cef8a07806c77fc2a"
+            owner:
+              type: object
+              description: Information of the user who adopted the pet
+              properties:
+                id:
+                  type: string
+                  description: Owner ID
+                  example: "68054b3cef8a07806c77fc2a"
+                first_name:
+                  type: string
+                  description: Owner's first name
+                  example: "Lucas"
+                last_name:
+                  type: string
+                  description: Owner's last name
+                  example: "Metz"
+                email:
+                  type: string
+                  description: Owner's email address
+                  example: "alexandra_rolfson@gmail.com"
+                phone:
+                  type: string
+                  description: Owner's phone number
+                  example: "+5658305377636"
+                address:
+                  type: object
+                  description: Owner's address
+                  properties:
+                    street:
+                      type: string
+                      description: Street name
+                      example: "Marianna Club"
+                    number:
+                      type: integer
+                      description: Street number
+                      example: 9067
+                    apartment:
+                      type: string
+                      description: Apartment number
+                      example: "Apt. 530"
+                    city:
+                      type: string
+                      description: City
+                      example: "Dickensland"
+                role:
+                  type: string
+                  description: User role
+                  example: "user"
+                pets:
+                  type: array
+                  description: List of pet IDs the user has adopted
+                  items:
+                    type: string
+                    example: "68054b44ef8a07806c77fc90"

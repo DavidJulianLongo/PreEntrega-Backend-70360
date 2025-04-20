@@ -7,7 +7,7 @@ class AdoptionDao {
     }
 
     async getAll() {
-        return await adoptionModel.find().populate(["pet", "owner"]);
+        return await adoptionModel.find();
     }
 
     async getOne(query) {

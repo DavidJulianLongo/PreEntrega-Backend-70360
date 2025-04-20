@@ -10,14 +10,7 @@ class AdoptionService {
     async getAll() {
         const adoptions = await adoptionDao.getAll();
         if (!adoptions || adoptions.length === 0) throw new AppError("No adoptions found", 404);
-
-        // Aplicamos el DTO a cada owner dentro del array de adopciones
-        adoptions.forEach(adoption => {
-            if (adoption.owner) {
-                adoption.owner = new OwnerDTO(adoption.owner.toObject());
-            }
-        });
-
+        
         return adoptions;
     }
 
@@ -32,13 +25,10 @@ class AdoptionService {
 
     async create(petId, ownerId) {
         const pet = await petDao.getOne({ _id: petId });
-        console.log("Pet ID (String):", petId);
-
         if (!pet) throw new AppError("Pet not found", 404);
         if (pet.adopted) throw new AppError("Pet has already been adopted", 409);
 
         const owner = await userDao.getOne({ _id: ownerId });
-        console.log("Owner ID (String):", ownerId);
         if (!owner) throw new AppError("Owner not found", 404);
 
         const newAdoption = await adoptionDao.create({ pet: petId, owner: ownerId });
