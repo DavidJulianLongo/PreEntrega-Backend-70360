@@ -1,0 +1,40 @@
+components:
+  schemas:
+    pet:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: MongoDB ObjectId.
+          example: 643fc9f1a23b9c1234567890
+        name:
+          type: string
+          description: Name of the pet.
+          example: Max
+        type:
+          type: string
+          description: Type of the pet (dog, cat).
+          example: dog
+        birthDate:
+          type: string
+          format: date
+          description: Birthdate of the pet.
+          example: 2022-05-15
+        sex:
+          type: string
+          enum: [male, female]
+          description: Gender of the pet.
+          example: male
+        sterilized:
+          type: boolean
+          description: Whether the pet is sterilized.
+          example: false
+        adopted:
+          type: boolean
+          description: Indicates if the pet is adopted (false default).
+          example: false
+        owner:
+          type: string
+          description: MongoDB ObjectId (only if the pet adopted is true). 
+          example: 643fc9f1a23b9c1234567890
+      

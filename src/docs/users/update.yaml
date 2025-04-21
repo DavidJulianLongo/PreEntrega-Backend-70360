@@ -47,35 +47,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  first_name:
-                    type: string
-                    example: John
-                  last_name:
-                    type: string
-                    example: Doe
-                  email:
-                    type: string
-                    example: user@gmail.com
-                  phone:
-                    type: string
-                    example: "+1234567890"
-                  address:
-                    type: object
-                    properties:
-                      street:
-                        type: string
-                        example: Main St
-                      number:
-                        type: number
-                        example: 91218
-                      apartment:
-                        type: string
-                        example: Suite 333
-                      city:
-                        type: string
-                        example: Theodorefort
+                $ref: "#/components/schemas/user"
         401:
           description: Invalid token, please login. 
         500:
