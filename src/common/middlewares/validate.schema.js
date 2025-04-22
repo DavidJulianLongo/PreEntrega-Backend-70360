@@ -1,4 +1,3 @@
-import { logger } from "../utils/logger.js";
 
 export const validateSchema = (schema) => {
     return (req, res, next) => {
