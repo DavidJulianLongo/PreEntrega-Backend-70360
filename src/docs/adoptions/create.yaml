@@ -1,10 +1,12 @@
 paths:
   /api/adoptions:
     post:
-      summary: Create a new adoption
+      summary: Create a new adoption (Only for logged-in admins)
       description: Allows the creation of a new adoption by associating a pet with an owner.
       tags:
         - Adoptions
+      security:
+        - cookieAuth: []
       requestBody:
         description: Data required to create a new adoption
         required: true
@@ -32,18 +34,55 @@ paths:
               schema:
                 type: object
                 properties:
-                  _id:
+                  status:
                     type: string
-                    description: ID of the created adoption
-                    example: "63e02b6f8d2c9c0e90f4e9c2"
-                  pet:
-                    type: string
-                    description: ID of the adopted pet
-                    example: "68054b44ef8a07806c77fc90"
-                  owner:
-                    type: string
-                    description: ID of the owner who adopted the pet
-                    example: "605c72ef1532072b8c1e0f50"
+                    example: Success
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        pet:
+                          type: string
+                          example: "68054b44ef8a07806c77fc90"
+                        owner:
+                          type: string
+                          example: "6806ba9ecb3c2863001d549c"
+                        _id:
+                          type: string
+                          example: "681138ea6b60f1a1dac2feb8"
+        "401":
+          description: Unauthorized (user not logged in)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 401
+                      message:
+                        type: string
+                        example: User not authenticated, please login 
+        "403":
+          description: Forbidden (user not authorized)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 403
+                      message:
+                        type: string
+                        example: "User not authorized"              
         "404":
           description: Pet or owner not found
           content:
@@ -51,9 +90,15 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: "Pet not found"
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      message:
+                        type: string
+                        example: "Pet not found"
         "409":
           description: Conflict (pet has already been adopted)
           content:
@@ -61,6 +106,28 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: "Pet has already been adopted"
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 409
+                      message:
+                        type: string
+                        example: "Pet has already been adopted"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: "Internal server error"

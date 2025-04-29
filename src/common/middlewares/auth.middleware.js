@@ -6,7 +6,7 @@ export const authMiddleware = (req, res, next) => {
         const token = req.signedCookies.token;
 
         const decoded = verifyToken(token);
-        if (!decoded) throw new AppError("Invalid token, please login", 401);
+        if (!decoded) throw new AppError("User not authenticated, please login", 401);
         req.user = decoded;
         next()
     } catch (error) {

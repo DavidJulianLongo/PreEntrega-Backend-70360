@@ -1,8 +1,8 @@
 paths:
   /api/adoptions/{id}:
-    get:
-      summary: Get a single adoption by ID (Only for logged-in admins)
-      description: Returns the details of a specific adoption, including the pet and owner information.
+    delete:
+      summary: Delete an adoption by ID (Only for logged-in admins)
+      description: Deletes a specific adoption, including its associated pet and owner references.
       tags:
         - Adoptions
       security:
@@ -13,14 +13,21 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the adoption to retrieve
+          description: ID of the adoption to delete
       responses:
         "200":
-          description: Successfully retrieved the adoption
+          description: Successfully deleted the adoption
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/adoption"
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Adoption successfully deleted
         "401":
           description: Unauthorized (user not logged in)
           content:

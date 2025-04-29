@@ -53,9 +53,9 @@ components:
           example: user
         pets:
           type: array
-          description: Array of Pet IDs owned by the user.
+          description: Initialize an empty array to store the pet IDs owned by the user.
           items:
             type: string
-            format: ObjectId
+            format: ObjectId¿
             example: 643fc9f1a23b9c1234567890   
 

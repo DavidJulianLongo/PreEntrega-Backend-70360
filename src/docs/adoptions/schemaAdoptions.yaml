@@ -1,0 +1,99 @@
+components:
+  schemas:
+    adoption:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Adoption ID
+          example: "680566df6ff696c0a9d9e4ee"
+        pet:
+          type: object
+          description: Adopted pet information
+          properties:
+            _id:
+              type: string
+              description: Pet ID
+              example: "68054b44ef8a07806c77fc90"
+            name:
+              type: string
+              description: Name of the pet
+              example: "Ace"
+            type:
+              type: string
+              description: Type of animal (dog, cat)
+              example: "cat"
+            birthDate:
+              type: string
+              description: Birth date of the pet
+              example: "2024-11-27T00:00:00.000Z"
+            sex:
+              type: string
+              description: Sex of the pet
+              example: "female"
+            sterilized:
+                  type: boolean
+                  description: Indicates if the pet is sterilized
+                  example: false
+            adopted:
+              type: boolean
+              description: Indicates if the pet is already adopted
+              example: true
+            owner:
+              type: string
+              description: Owner ID
+              example: "68054b3cef8a07806c77fc2a"
+        owner:
+          type: object
+          description: Information of the user who adopted the pet
+          properties:
+            id:
+              type: string
+              description: Owner ID
+              example: "68054b3cef8a07806c77fc2a"
+            first_name:
+              type: string
+              description: Owner's first name
+              example: "Lucas"
+            last_name:
+              type: string
+              description: Owner's last name
+              example: "Metz"
+            email:
+              type: string
+              description: Owner's email address
+              example: "alexandra_rolfson@gmail.com"
+            phone:
+              type: string
+              description: Owner's phone number
+              example: "+5658305377636"
+            address:
+              type: object
+              description: Owner's address
+              properties:
+                street:
+                  type: string
+                  description: Street name
+                  example: "Marianna Club"
+                number:
+                  type: integer
+                  description: Street number
+                  example: 9067
+                apartment:
+                  type: string
+                  description: Apartment number
+                  example: "Apt. 530"
+                city:
+                  type: string
+                  description: City
+                  example: "Dickensland"
+            role:
+              type: string
+              description: User role
+              example: "user"
+            pets:
+              type: array
+              description: List of pet IDs the user has adopted
+            items:
+              type: string
+              example: "68054b44ef8a07806c77fc90"
