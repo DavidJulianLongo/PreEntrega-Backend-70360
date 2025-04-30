@@ -1,10 +1,10 @@
 paths:
   /api/users/{id}:
     delete:
-      summary: Remove user by ID
+      summary: Remove user by ID (Admin and User logged in)
       description: Remove a user using its unique ID. This operation requires authentication.
       tags:
-        - Users
+        - Users  
       security:
         - cookieAuth: []
       parameters:
@@ -23,8 +23,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/user"
+        401:
+          description: Unauthorized (user not logged in)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 401
+                      message:
+                        type: string
+                        example: User not authenticated, please login
         404:
-          description: User not found.
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      message:
+                        type: string
+                        example: "User not found"
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: "Internal server error"               
 
 
 

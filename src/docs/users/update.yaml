@@ -1,7 +1,7 @@
 paths:
   /api/users/update:
     put:
-      summary: Update a user
+      summary: Update a user (Only for logged-in users)
       description: Update the logged-in user's data. This operation requires authentication. The token is in a signedCookie
       tags:
         - Users
@@ -49,9 +49,53 @@ paths:
               schema:
                 $ref: "#/components/schemas/user"
         401:
-          description: Invalid token, please login. 
+          description: Unauthorized (user not logged in)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 401
+                      message:
+                        type: string
+                        example: User not authenticated, please login
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      message:
+                        type: string
+                        example: "User not found"
         500:
-          description: Something went wrong.
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: "Internal server error"
 
 
 

@@ -49,7 +49,7 @@ class UserService {
         //Hashea la nueva contraseña y la actualiza
         const hashedPassword = createHash(newPassword);
         const updatedUser = await userDao.update(id, { password: hashedPassword });
-        if (!updatedUser) throw new AppError('Error updating password', 500);
+        if (!updatedUser) throw new AppError('Internal server error', 500);
 
         return new UserDTO(updatedUser);
     }

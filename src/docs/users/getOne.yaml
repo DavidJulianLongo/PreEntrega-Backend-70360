@@ -1,10 +1,12 @@
 paths:
   /api/users/{id}:
     get:
-      summary: Get a user by ID
+      summary: Get a user by ID (Only for logged-in admins)
       description: Retrieve a user's details using its unique ID.
       tags:
         - Users
+      security:
+        - cookieAuth: []
       parameters:
         - in: path
           name: id
@@ -21,5 +23,67 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/user"
+        401:
+          description: Unauthorized (user not logged in)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 401
+                      message:
+                        type: string
+                        example: User not authenticated, please login 
+        403:
+          description: Forbidden (user not authorized)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 403
+                      message:
+                        type: string
+                        example: "User not authorized"              
         404:
-          description: User not found.
+          description: Users not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      message:
+                        type: string
+                        example: "Users not found"
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: "Internal server error"
