@@ -1,10 +1,12 @@
 paths:
   /api/pets/{id}:
     delete:
-      summary: Delete pet
+      summary: Delete pet by ID (Only for logged-in admins)
       description: Delete a pet's details using its unique ID.
       tags:
         - Pets
+      security:
+        - cookieAuth: []
       parameters:
         - in: path
           name: id
@@ -20,9 +22,70 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/pet' 
+                $ref: "#/components/schemas/pet" 
+        401:
+          description: Unauthorized (user not logged in)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 401
+                      message:
+                        type: string
+                        example: User not authenticated, please login 
+        403:
+          description: Forbidden (user not authorized)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 403
+                      message:
+                        type: string
+                        example: "User not authorized"                    
         404:
-          description: Pet not found.
-
+          description: Pet not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      message:
+                        type: string
+                        example: "Pet not found"
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: "Internal server error"
 
           

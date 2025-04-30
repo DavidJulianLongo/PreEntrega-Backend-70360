@@ -27,7 +27,7 @@ paths:
                 - petId
                 - ownerId
       responses:
-        "201":
+        201:
           description: Adoption created successfully
           content:
             application/json:
@@ -51,7 +51,7 @@ paths:
                         _id:
                           type: string
                           example: "681138ea6b60f1a1dac2feb8"
-        "401":
+        401:
           description: Unauthorized (user not logged in)
           content:
             application/json:
@@ -67,7 +67,7 @@ paths:
                       message:
                         type: string
                         example: User not authenticated, please login 
-        "403":
+        403:
           description: Forbidden (user not authorized)
           content:
             application/json:
@@ -83,7 +83,7 @@ paths:
                       message:
                         type: string
                         example: "User not authorized"              
-        "404":
+        404:
           description: Pet or owner not found
           content:
             application/json:
@@ -99,7 +99,7 @@ paths:
                       message:
                         type: string
                         example: "Pet not found"
-        "409":
+        409:
           description: Conflict (pet has already been adopted)
           content:
             application/json:
@@ -115,7 +115,7 @@ paths:
                       message:
                         type: string
                         example: "Pet has already been adopted"
-        "500":
+        500:
           description: Internal server error
           content:
             application/json:

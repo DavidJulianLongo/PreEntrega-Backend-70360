@@ -15,13 +15,13 @@ paths:
             type: string
           description: ID of the adoption to retrieve
       responses:
-        "200":
+        200:
           description: Successfully retrieved the adoption
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/adoption"
-        "401":
+        401:
           description: Unauthorized (user not logged in)
           content:
             application/json:
@@ -37,7 +37,7 @@ paths:
                       message:
                         type: string
                         example: User not authenticated, please login 
-        "403":
+        403:
           description: Forbidden (user not authorized)
           content:
             application/json:
@@ -53,7 +53,7 @@ paths:
                       message:
                         type: string
                         example: "User not authorized"              
-        "404":
+        404:
           description: Adoption not found
           content:
             application/json:
@@ -69,7 +69,7 @@ paths:
                       message:
                         type: string
                         example: "Adoption not found"
-        "500":
+        500:
           description: Internal server error
           content:
             application/json:

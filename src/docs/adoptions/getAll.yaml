@@ -8,7 +8,7 @@ paths:
       security:
         - cookieAuth: []
       responses:
-        "200":
+        200:
           description: Successfully retrieved list of adoptions
           content:
             application/json:
@@ -32,7 +32,7 @@ paths:
                         _id:
                           type: string
                           example: "681138ea6b60f1a1dac2feb8"
-        "401":
+        401:
           description: Unauthorized (user not logged in)
           content:
             application/json:
@@ -48,7 +48,7 @@ paths:
                       message:
                         type: string
                         example: User not authenticated, please login 
-        "403":
+        403:
           description: Forbidden (user not authorized)
           content:
             application/json:
@@ -64,7 +64,7 @@ paths:
                       message:
                         type: string
                         example: "User not authorized"              
-        "404":
+        404:
           description: Adoptions not found
           content:
             application/json:
@@ -80,7 +80,7 @@ paths:
                       message:
                         type: string
                         example: "Adoptions not found"
-        "500":
+        500:
           description: Internal server error
           content:
             application/json:

@@ -1,9 +1,11 @@
 paths:
   /api/pets/register:
     post:
-      summary: Create a new pet
+      summary: Create a new pet (Only for logged-in admins)
       tags:
         - Pets
+      security:
+        - cookieAuth: []
       requestBody:
         required: true
         content:
@@ -35,41 +37,72 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '.pet/schemPet.yaml#/components/schemas/pet'
+                $ref: "#/components/schemas/pet"
+        401:
+          description: Unauthorized (user not logged in)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 401
+                      message:
+                        type: string
+                        example: User not authenticated, please login 
+        403:
+          description: Forbidden (user not authorized)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 403
+                      message:
+                        type: string
+                        example: "User not authorized"              
+        409:
+          description: Conflict (pet already exists)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      message:
+                        type: string
+                        example: "Pet already exists"
         500:
-          description: Something went wrong.
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: "Internal server error"
 
 
-# components:
-#   schemas:
-#     pet:
-#       type: object
-#       properties:
-#         _id:
-#           type: string
-#           description: MongoDB ObjectId.
-#           example: 643fc9f1a23b9c1234567890
-#         name:
-#           type: string
-#           description: Name of the pet.
-#           example: Max
-#         type:
-#           type: string
-#           description: Type of the pet (dog, cat).
-#           example: dog
-#         birthDate:
-#           type: string
-#           format: date
-#           description: Birthdate of the pet.
-#           example: 2022-05-15
-#         sex:
-#           type: string
-#           enum: [male, female]
-#           description: Gender of the pet.
-#           example: male
-#         sterilized:
-#           type: boolean
-#           description: Whether the pet is sterilized.
-#           example: false
               
             
