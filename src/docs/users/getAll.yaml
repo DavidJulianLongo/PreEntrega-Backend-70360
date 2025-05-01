@@ -2,7 +2,7 @@ paths:
   /api/users/:
     get:
       summary: Get all users (Only for logged-in admins)
-      description: Retrieve a array of all users.
+      description: Retrieve a array of all users. The field 'password' was not included in the response.
       tags:
         - Users
       security:

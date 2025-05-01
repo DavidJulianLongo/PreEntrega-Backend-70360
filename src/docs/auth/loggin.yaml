@@ -39,5 +39,36 @@ paths:
                   token: 
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-        "401":
-          description: Invalid email or password
+        401:
+            description: Invalid mail or password
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    Error:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 401
+                        message:
+                          type: string
+                          example: "Invalid email or password"
+        500:
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    Error:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 500
+                        message:
+                          type: string
+                          example: "Internal server error"
+

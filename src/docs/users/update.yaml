@@ -2,7 +2,7 @@ paths:
   /api/users/update:
     put:
       summary: Update a user (Only for logged-in users)
-      description: Update the logged-in user's data. This operation requires authentication. The token is in a signedCookie
+      description: Update the logged-in user's data. This operation requires authentication. The token is in a signedCookie. The field 'password' was not included in the response.
       tags:
         - Users
       security:

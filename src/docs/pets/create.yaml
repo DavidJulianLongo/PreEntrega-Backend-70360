@@ -21,8 +21,10 @@ paths:
               properties:
                 name:
                   type: string
+                  example: "Buddy"
                 type:
                   type: string
+                  enum: [dog, cat]
                 birthDate:
                   type: string
                   format: date

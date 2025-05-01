@@ -24,5 +24,19 @@ paths:
                 items:
                   $ref: "#/components/schemas/user"
         500:
-          description: Something went wrong.
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    Error:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 500
+                        message:
+                          type: string
+                          example: "Internal server error"
 

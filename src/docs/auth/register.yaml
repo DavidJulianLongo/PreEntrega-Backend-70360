@@ -57,7 +57,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/user"
-        "409":
-          description: User already exists.
-
+        409:
+            description: Conflict (User already exists)
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    Error:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 409
+                        message:
+                          type: string
+                          example: "User already exists"
+        500:
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    Error:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 500
+                        message:
+                          type: string
+                          example: "Internal server error"
 
