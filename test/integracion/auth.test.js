@@ -1,12 +1,12 @@
 import { expect } from "chai";
 import supertest from "supertest";
 
-
 const request = supertest("http://localhost:3000");
 
 describe("Auth routes integration test", () => {
-    
+
     let userTest;
+    let authCookie;
 
     it("[POST] /api/auth/register - Should register a new user", async () => {
 
@@ -25,9 +25,9 @@ describe("Auth routes integration test", () => {
         }
 
         const { statusCode, body, error } = await request.post("/api/auth/register").send(newUser);
-        // console.log("Status code:", statusCode);
-        // console.log("Body:", body);
-        // console.log("Error:", error);
+
+        userTest = body.payload; // Guardar el usuario creado para eliminarlo después
+
         expect(statusCode).to.be.equal(201);
         expect(body.payload.first_name).to.be.equal("German");
         expect(body.payload.last_name).to.be.equal("Fasafector");
@@ -40,20 +40,34 @@ describe("Auth routes integration test", () => {
         expect(body.payload.password).to.not.be.equal("!User123456"); // porque la pass viene encriptada
     })
 
+
+
     it("[POST] /api/auth/login - Should login a user", async () => {
 
         const userData = {
             email: "alefector@gmail.com",
             password: "!User123456",
-        }    
-    
-        const { statusCode, body, error} = await request.post("/api/auth/login").send(userData);
-    
-        expect(statusCode).to.be.equal(200);
-        expect(body.message).to.be.equal("Login successful");
-        expect(body.token).to.exist; // Verifica que haya un token
+        }
+
+        const response = await request.post("/api/auth/login").send(userData);
+        expect(response.statusCode).to.be.equal(200);
+        expect(response.body.message).to.be.equal("Login successful");
+        expect(response.body.token).to.exist; 
+        
+        //guardamos la cookie con el JWT
+        authCookie = response.headers["set-cookie"]?.[0];
     });
 
-   
+    after(async () => {
+        try {
+            const res = await request
+            .delete(`/api/users/${userTest._id}`)
+            .set("Cookie", authCookie); // Usar la cookie de autenticación para eliminar el usuario
+            console.log(res.body);
+        } catch (error) {
+            console.log(error);
+        }
+
+    });
 
 });
