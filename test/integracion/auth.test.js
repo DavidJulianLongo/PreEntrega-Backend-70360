@@ -3,7 +3,7 @@ import supertest from "supertest";
 
 const request = supertest("http://localhost:3000");
 
-describe("Auth routes integration test", () => {
+describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
 
     let userTest;
     let authCookie;
