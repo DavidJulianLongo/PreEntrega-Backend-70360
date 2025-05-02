@@ -11,6 +11,9 @@ import { specs } from './config/swagger.config.js';
 
 const app = express();
 
+// Conexión a MongoDB
+conectMongoDB()
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -25,11 +28,8 @@ app.use("/api/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 // Middleware de errores
 app.use(errorHandler);
 
-// Conexión a MongoDB y arranque del servidor
-conectMongoDB()
-    .then(() => {
-        app.listen(process.env.PORT, () => logger.info(`Server ok on PORT: ${process.env.PORT}`));
-    })
-    .catch((error) => {
-        logger.error('Error connecting to MongoDB:', error);
+app.listen(process.env.PORT, () => {
+        logger.info(`Server ok on PORT: ${process.env.PORT}`);
     });
+
+
