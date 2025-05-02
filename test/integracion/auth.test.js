@@ -28,6 +28,7 @@ describe("Auth routes integration test", () => {
 
         userTest = body.payload; // Guardar el usuario creado para eliminarlo después
 
+        // Aserciones para verificar que el registro fue exitoso
         expect(statusCode).to.be.equal(201);
         expect(body.payload.first_name).to.be.equal("German");
         expect(body.payload.last_name).to.be.equal("Fasafector");
@@ -50,14 +51,18 @@ describe("Auth routes integration test", () => {
         }
 
         const response = await request.post("/api/auth/login").send(userData);
+
+        // Aserciones para verificar que el login fue exitoso
         expect(response.statusCode).to.be.equal(200);
         expect(response.body.message).to.be.equal("Login successful");
         expect(response.body.token).to.exist; 
         
-        //guardamos la cookie con el JWT
+        // Guarda la cookie de autenticación (usada para endpoints protegidos
         authCookie = response.headers["set-cookie"]?.[0];
     });
 
+
+    //se ejecuta después de todos los tests: elimina al usuario creado
     after(async () => {
         try {
             const res = await request
