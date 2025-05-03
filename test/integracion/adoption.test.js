@@ -78,8 +78,8 @@ describe("===== INTEGRATION TEST FOR ADOPTIONS ROUTES =====", () => {
 
         // crear una mascota para la adopcion
         const pet = {
-            name: "Mike",
-            type: "dog",
+            name: "Spike",
+            type: "cat",
             birthDate: "2025-05-02",
             sex: "male",
             sterilized: true
@@ -96,7 +96,7 @@ describe("===== INTEGRATION TEST FOR ADOPTIONS ROUTES =====", () => {
 
 
     it("[POST] /api/adoptions - Should create a new adoption", async () => {
-       
+
         // Creamos una adopcion
         const adoptionData = {
             petId: petTestId,
@@ -129,12 +129,67 @@ describe("===== INTEGRATION TEST FOR ADOPTIONS ROUTES =====", () => {
     });
 
 
-    // Bloque after para limpiar los datos creados después de la prueba
-    after(async () => {
-        // Eliminar adopción
-        const deleteAdoptionResponse = await request.delete(`/api/adoptions/${adoptionId}`).set("Cookie", adminCookie);
-        expect(deleteAdoptionResponse.statusCode).to.be.equal(200);
+    it("[GET] /api/adoptions - Should get all adoptions", async () => {
 
+        // Obtenemos todas las adopciones
+        const { statusCode, body } = await request.get("/api/adoptions").set("Cookie", adminCookie);
+
+        // Aserciones para verificar las adopciones
+        expect(statusCode).to.be.equal(200);
+        expect(body).to.have.property("status", "Success");
+        expect(body).to.have.property("payload").that.is.an("array");
+
+        body.payload.forEach(adoption => {
+            expect(adoption).to.be.an("object");
+            expect(adoption).to.have.property("pet");
+            expect(adoption).to.have.property("owner");
+        });
+
+    });
+
+
+    it("[GET] /api/adoptions/:id - Should get an adoption by ID", async () => {
+
+        // Obtenemos la adopcion por id
+        const { statusCode, body } = await request.get(`/api/adoptions/${adoptionId}`).set("Cookie", adminCookie);
+
+        // Aserciones para verificar la adopcion
+        expect(statusCode).to.be.equal(200);
+        expect(body).to.have.property("status", "Success");
+        expect(body).to.have.property("payload").that.is.an("object");
+        expect(body.payload).to.have.property("_id").that.equals(adoptionId);
+        expect(body.payload).to.have.property("pet").that.is.an("object");
+        expect(body.payload).to.have.property("owner").that.is.an("object");
+
+    });
+
+
+    it("[DELETE] /api/adoptions/:id - Should delete an adoption by Id", async () => {
+
+        // Obtenemos la adopcion por id
+        const { statusCode, body } = await request.delete(`/api/adoptions/${adoptionId}`).set("Cookie", adminCookie);
+
+        // Aserciones para verificar la adopcion fue eliminada
+        expect(statusCode).to.be.equal(200);
+        expect(body).to.have.property("status", "Success");
+        expect(body).to.have.property("message", "Adoption remove successfully");
+
+        // Verifica que el pet ya no tenga owner
+        const petResponse = await request.get(`/api/pets/${petTestId}`).set("Cookie", adminCookie);
+        expect(petResponse.statusCode).to.equal(200);
+        expect(petResponse.body.payload).to.not.have.property("owner");
+
+        // Verifica que el user ya no tenga el pet en el array de pets
+        const ownerResponse = await request.get(`/api/users/${userTestId}`).set("Cookie", adminCookie);
+        expect(ownerResponse.statusCode).to.equal(200);
+        expect(ownerResponse.body.payload.pets).to.not.include(petTestId);
+
+    });
+
+
+    // After para limpiar los datos creados después de la prueba
+    after(async () => {
+        
         // Eliminar mascota
         const deletePetResponse = await request.delete(`/api/pets/${petTestId}`).set("Cookie", adminCookie);
         expect(deletePetResponse.statusCode).to.be.equal(200);

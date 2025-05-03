@@ -6,7 +6,7 @@ const request = supertest("http://localhost:3000");
 describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
 
     let userTestId;
-    let authCookie;
+    let userTestCookie;
 
     it("[POST] /api/auth/register - Should register a new user", async () => {
 
@@ -57,15 +57,15 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
         expect(response.body.message).to.be.equal("Login successful");
         expect(response.body.token).to.exist; 
         
-        // Guarda la cookie de autenticación (usada para endpoints protegidos
-        authCookie = response.headers["set-cookie"]?.[0];
+        // Guarda la cookie de autenticación para borrar el usuario en el after
+        userTestCookie = response.headers["set-cookie"]?.[0];
     });
 
 
     //se ejecuta después de todos los tests: elimina al usuario creado
     after(async () => {
         try {
-            await request.delete(`/api/users/${userTestId._id}`).set("Cookie", authCookie); // Usar la cookie de autenticación para eliminar el usuario
+            await request.delete(`/api/users/${userTestId._id}`).set("Cookie", userTestCookie); // Usar la cookie de autenticación para eliminar el usuario
         } catch (error) {
             console.log(error);
         }

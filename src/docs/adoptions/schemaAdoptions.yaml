@@ -94,6 +94,9 @@ components:
             pets:
               type: array
               description: List of pet IDs the user has adopted
-            items:
-              type: string
-              example: "68054b44ef8a07806c77fc90"
+              items:
+                type: string
+                example: "68054b44ef8a07806c77fc90"
+              example:
+                - "68054b44ef8a07806c77fc90"
+                - "68054b9fef8a07806c77fc92"
