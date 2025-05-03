@@ -12,8 +12,8 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
 
         const newUser = {
             first_name: "German",
-            last_name: "Fasafector",
-            email: "alefector@gmail.com",
+            last_name: "García",
+            email: "ggarcia@gmail.com",
             phone: "+54123456789",
             address: {
                 street: "Calle Falsa",
@@ -24,15 +24,15 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
             password: "!User123456",
         }
 
-        const { statusCode, body, error } = await request.post("/api/auth/register").send(newUser);
+        const { statusCode, body} = await request.post("/api/auth/register").send(newUser);
 
         userTest = body.payload; // Guardar el usuario creado para eliminarlo después
 
         // Aserciones para verificar que el registro fue exitoso
         expect(statusCode).to.be.equal(201);
         expect(body.payload.first_name).to.be.equal("German");
-        expect(body.payload.last_name).to.be.equal("Fasafector");
-        expect(body.payload.email).to.be.equal("alefector@gmail.com");
+        expect(body.payload.last_name).to.be.equal("García");
+        expect(body.payload.email).to.be.equal("ggarcia@gmail.com");
         expect(body.payload.phone).to.be.equal("+54123456789");
         expect(body.payload.address.street).to.be.equal("Calle Falsa");
         expect(body.payload.address.number).to.be.equal(3156);
@@ -46,7 +46,7 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
     it("[POST] /api/auth/login - Should login a user", async () => {
 
         const userData = {
-            email: "alefector@gmail.com",
+            email: "ggarcia@gmail.com",
             password: "!User123456",
         }
 
@@ -65,10 +65,7 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
     //se ejecuta después de todos los tests: elimina al usuario creado
     after(async () => {
         try {
-            const res = await request
-            .delete(`/api/users/${userTest._id}`)
-            .set("Cookie", authCookie); // Usar la cookie de autenticación para eliminar el usuario
-            console.log(res.body);
+            await request.delete(`/api/users/${userTest._id}`).set("Cookie", authCookie); // Usar la cookie de autenticación para eliminar el usuario
         } catch (error) {
             console.log(error);
         }

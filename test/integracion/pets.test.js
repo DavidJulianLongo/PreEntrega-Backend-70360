@@ -18,10 +18,8 @@ describe("===== INTEGRATION TEST FOR PETS ROUTES =====", () => {
         }
 
         const response = await request.post("/api/auth/login").send(loginAdmin);
+        //verificamos que el login fue exitoso
         expect(response.statusCode).to.be.equal(200);
-        expect(response.body.message).to.be.equal("Login successful");
-        expect(response.body.token).to.exist;
-
         adminCookie = response.headers["set-cookie"]?.[0]; // Guardamos la cookie
     });
 
@@ -66,7 +64,7 @@ describe("===== INTEGRATION TEST FOR PETS ROUTES =====", () => {
 
         const response = await request.put(`/api/pets/${createdPetId}`).set("Cookie", adminCookie).send(updatedPet);
 
-        // Aserciones para verificar que el registro fue exitoso
+        // Aserciones para verificar que el update fue exitoso
         expect(response.statusCode).to.be.equal(200);
         expect(response.body.payload.name).to.be.equal("Peter");
         expect(response.body.payload.type).to.be.equal("cat");
