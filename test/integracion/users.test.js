@@ -45,6 +45,7 @@ describe("===== INTEGRATION TEST FOR USERS ROUTES =====", () => {
         const admin = await request.post("/api/auth/register").send(newAdmin);
         //verificamos que el registro fue exitoso
         expect(admin.statusCode).to.be.equal(201);
+        
         const user = await request.post("/api/auth/register").send(newUser);
         //verificamos que el registro fue exitoso
         expect(user.statusCode).to.be.equal(201);
@@ -61,6 +62,7 @@ describe("===== INTEGRATION TEST FOR USERS ROUTES =====", () => {
         const resAdmin = await request.post("/api/auth/login").send(loginAdmin);
         //verificamos que el login fue exitoso
         expect(resAdmin.statusCode).to.be.equal(200);
+        // Guarda la cookie de autenticación (usada para endpoints protegidos)
         adminCookie = resAdmin.headers["set-cookie"]?.[0];
 
 
@@ -73,6 +75,7 @@ describe("===== INTEGRATION TEST FOR USERS ROUTES =====", () => {
         const resUser = await request.post("/api/auth/login").send(loginUser);
         //verificamos que el login fue exitoso
         expect(resUser.statusCode).to.be.equal(200);
+        // Guarda la cookie de autenticación (usada para endpoints protegidos)
         userCookie = resUser.headers["set-cookie"]?.[0];
     });
 

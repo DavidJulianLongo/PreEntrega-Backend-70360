@@ -5,7 +5,7 @@ const request = supertest("http://localhost:3000");
 
 describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
 
-    let userTest;
+    let userTestId;
     let authCookie;
 
     it("[POST] /api/auth/register - Should register a new user", async () => {
@@ -24,9 +24,9 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
             password: "!User123456",
         }
 
-        const { statusCode, body} = await request.post("/api/auth/register").send(newUser);
+        const { statusCode, body } = await request.post("/api/auth/register").send(newUser);
 
-        userTest = body.payload; // Guardar el usuario creado para eliminarlo después
+        userTestId = body.payload; // Guardar el usuario creado para eliminarlo después
 
         // Aserciones para verificar que el registro fue exitoso
         expect(statusCode).to.be.equal(201);
@@ -65,7 +65,7 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
     //se ejecuta después de todos los tests: elimina al usuario creado
     after(async () => {
         try {
-            await request.delete(`/api/users/${userTest._id}`).set("Cookie", authCookie); // Usar la cookie de autenticación para eliminar el usuario
+            await request.delete(`/api/users/${userTestId._id}`).set("Cookie", authCookie); // Usar la cookie de autenticación para eliminar el usuario
         } catch (error) {
             console.log(error);
         }
