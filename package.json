@@ -1,5 +1,5 @@
 {
-  "name": "entrega",
+  "name": "entraga-api-backend-3-final",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,16 +7,16 @@
   "scripts": {
     "test": "mocha test/**/*.test.js",
     "test:watch": "node --watch ./node_modules/mocha/bin/mocha.js test/**/*.test.js",
-    "start": "node app.js",
-    "dev": "node --watch --env-file=.env src/app.js"
+    "dev": "node --watch --env-file=.env src/app.js",
+    "debug7": "node --watch --env-file=.env ./src/app.js",
+    "prod": "node --watch --env-file=.env ./src/app.js",
+    "start": "node --env-file=.env ./src/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "express-compression": "^1.0.2",
     "jsonwebtoken": "^9.0.2",
