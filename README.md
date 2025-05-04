@@ -43,7 +43,7 @@ Este proyecto es la API backend para el sistema de adopciones de mascotas. Propo
 - **PUT** `/api/users/update`: Actualizar un usuario (Solo para usuarios registrados)
 
 
-## 🪵 Logger
+##  Logger
 
 Este proyecto utiliza [Winston](https://github.com/winstonjs/winston) para gestionar los logs. Los errores se registran tanto en consola como en un archivo local:
 
