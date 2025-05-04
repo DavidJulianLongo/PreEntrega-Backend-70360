@@ -3,7 +3,7 @@
 
 ## Descripción
 
-Este proyecto es la API backend para el sistema de adopciones de mascotas. Proporciona endpoints para gestionar usuarios, mascotas, adopciones y autenticación. Está diseñado para ser usado en un entorno de producción y desarrollo, con herramientas como Mocha para pruebas y Swagger para documentación.
+Este proyecto es la API para la entrega final de la carrera Fullstack de Coderhouse, comisión #70360. API para sistema de adopciones de mascotas. Proporciona endpoints para gestionar usuarios, mascotas, adopciones y autenticación. Está diseñado para ser usado en un entorno de producción y desarrollo, con herramientas como Mocha para pruebas y Swagger para documentación.
 
 ## Versiones
 
