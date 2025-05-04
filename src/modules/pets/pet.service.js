@@ -28,15 +28,19 @@ class PetService {
     async createPetMock(amount) {
         const pets = petMock(amount);
         await petDao.removeAll();
-
+    
+        const savedPets = [];
+    
         for (const pet of pets) {
             const newPet = new PetDTO(pet);
-            await petDao.create(newPet);
+            const created = await petDao.create(newPet);
+            savedPets.push(created);
         }
-
-        return await petDao.create(pets);
+    
+        return savedPets;
     }
 
+    
     async getAll() {
         const pets = await petDao.getAll();
         if (!pets) throw new AppError("Pets not found", 404);

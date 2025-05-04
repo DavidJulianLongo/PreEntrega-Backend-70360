@@ -30,6 +30,7 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
 
         // Aserciones para verificar que el registro fue exitoso
         expect(statusCode).to.be.equal(201);
+        expect(body.status).to.be.equal("Success");
         expect(body.payload.first_name).to.be.equal("German");
         expect(body.payload.last_name).to.be.equal("García");
         expect(body.payload.email).to.be.equal("ggarcia@gmail.com");
@@ -64,12 +65,11 @@ describe("===== INTEGRATION TEST FOR AUTH ROUTES =====", () => {
 
     //se ejecuta después de todos los tests: elimina al usuario creado
     after(async () => {
-        try {
-            await request.delete(`/api/users/${userTestId._id}`).set("Cookie", userTestCookie); // Usar la cookie de autenticación para eliminar el usuario
-        } catch (error) {
-            console.log(error);
-        }
 
-    });
+        // Usar la cookie de autenticación para eliminar el usuario
+        const deleteUserResponse = await request.delete(`/api/users/${userTestId._id}`).set("Cookie", userTestCookie);
+        expect(deleteUserResponse.statusCode).to.be.equal(200);
+        
+    }); 
 
 });

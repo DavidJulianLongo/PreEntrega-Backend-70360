@@ -1,3 +1,4 @@
+#Schema de la del response de register
 components:
   schemas:
     user:
@@ -59,3 +60,145 @@ components:
             format: ObjectId¿
             example: 643fc9f1a23b9c1234567890   
 
+
+#Schema del response del getOne
+    userId:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: MongoDB ObjectId.
+          example: 643fc9f1a23b9c1234567890
+        first_name:
+          type: string
+          description: User name.
+          example: John
+        last_name:
+          type: string
+          description: User last name.
+          example: Doe
+        email:
+          type: string
+          description: User email.
+          example: user@gmail.com
+        phone:
+          type: string
+          description: User phone number.
+          example: "+1234567890"
+        address:
+          type: object
+          description: User address.
+          properties:
+            street:
+              type: string
+              description: Street name.
+              example: Main St
+            number:
+              type: number
+              description: Street number.
+              example: 456
+            apartment:
+              type: string
+              description: Apartment number.
+              example: 4th A
+            city:
+              type: string
+              description: City name.
+              example: Springfield  
+        role:
+          type: string
+          description: User role (default, "user").
+          example: user
+        pets:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: MongoDB ObjectId.
+              example: 643fc9f1a23b9c1234567890
+            name:
+              type: string
+              description: Name of the pet.
+              example: Max
+            type:
+              type: string
+              description: Type of the pet (dog, cat).
+              example: dog
+            birthDate:
+              type: string
+              format: date
+              description: Birthdate of the pet.
+              example: 2022-05-15
+            sex:
+              type: string
+              enum: [male, female]
+              description: Gender of the pet.
+              example: male
+            sterilized:
+              type: boolean
+              description: Whether the pet is sterilized.
+              example: false
+            adopted:
+              type: boolean
+              description: Indicates if the pet is adopted (false default).
+              example: false
+            owner:
+              type: string
+              description: MongoDB ObjectId (only if the pet adopted is true). 
+              example: 643fc9f1a23b9c1234567890
+
+#Schema del response del getAll, update, restorePass y delete
+    userAll:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: MongoDB ObjectId.
+          example: 643fc9f1a23b9c1234567890
+        first_name:
+          type: string
+          description: User name.
+          example: John
+        last_name:
+          type: string
+          description: User last name.
+          example: Doe
+        email:
+          type: string
+          description: User email.
+          example: user@gmail.com
+        phone:
+          type: string
+          description: User phone number.
+          example: "+1234567890"
+        address:
+          type: object
+          description: User address.
+          properties:
+            street:
+              type: string
+              description: Street name.
+              example: Main St
+            number:
+              type: number
+              description: Street number.
+              example: 456
+            apartment:
+              type: string
+              description: Apartment number.
+              example: 4th A
+            city:
+              type: string
+              description: City name.
+              example: Springfield  
+        role:
+          type: string
+          description: User role (default, "user").
+          example: user
+        pets:
+          type: array
+          description: Initialize an empty array to store the pet IDs owned by the user.
+          items:
+            type: string
+            format: ObjectId¿
+            example: 643fc9f1a23b9c1234567890 

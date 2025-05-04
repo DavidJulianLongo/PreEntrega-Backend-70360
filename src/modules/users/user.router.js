@@ -11,8 +11,8 @@ const router = Router();
 router.post("/mocks/:amount", validateSchema(userMockSchema), userController.createUsersMock);
 router.get("/", authMiddleware, authorization("admin"), userController.getAll);
 router.get("/:id",authMiddleware, authorization("admin"), validateSchema(objectIdParamsSchema), userController.getOne);
-router.put("/update", authMiddleware,authorization("user"), userController.update);
-router.put("/restore-pass", authMiddleware, authorization("user"), userController.restorePass);
+router.put("/update", authMiddleware, userController.update);
+router.put("/restore-pass", authMiddleware, userController.restorePass);
 router.delete("/:id", authMiddleware, validateSchema(objectIdParamsSchema), authorization(["user", "admin"]), userController.remove);
 
 export default router;
