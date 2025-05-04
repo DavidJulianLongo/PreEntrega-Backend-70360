@@ -99,6 +99,7 @@ Configuración personalizada incluye:
 
 - **bcrypt**: Para encriptar contraseñas.
 - **cookie-parser**: Para analizar cookies.
+- **dotenv**: Para  cargar variables de entorno.
 - **express**: Framework web para Node.js.
 - **express-compression**: Para comprimir respuestas HTTP.
 - **jsonwebtoken**: Para manejar JSON Web Tokens (JWT).
@@ -107,6 +108,7 @@ Configuración personalizada incluye:
 - **swagger-ui-express**: Para mostrar la documentación de Swagger en una interfaz web.
 - **winston**: Para logging.
 - **zod**: Para validaciones de entrada.
+
 
 ### Dependencias de Desarrollo
 

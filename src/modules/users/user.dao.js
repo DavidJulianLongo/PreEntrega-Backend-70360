@@ -1,5 +1,6 @@
 import { userModel } from './user.model.js';
 
+
 class UserDao {
 
     async create(data) {
