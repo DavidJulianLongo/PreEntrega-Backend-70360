@@ -77,6 +77,6 @@ describe("===== TEST USERDAO =====", () => {
     // Cerrar la conexión a la base de datos después de los tests
     await mongoose.connection.close();
     logger.info("Disconnected from MongoDB");
-    console.log("  ===== END UNITARIES TEST =====");
+    console.log("  ===== UNIT TESTING FINISHED =====");
   });
 });

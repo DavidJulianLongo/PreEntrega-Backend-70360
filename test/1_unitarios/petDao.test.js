@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-describe("===== UNITARIES TEST =====", () => {
+describe("===== UNIT TESTING START =====", () => {
     let petTest;
 
     // Conexión a la base de datos antes de los tests
